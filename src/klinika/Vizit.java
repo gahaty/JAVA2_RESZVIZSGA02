@@ -93,4 +93,13 @@ public class Vizit {
 
 	}
 
+	@Override
+	public String toString() {
+		return "Vizit [szakrendeles_id=" + szakrendeles_id + ", orvosok_id=" + orvosok_id + ", kezelok_id=" + kezelok_id
+				+ ", datum_id=" + datum_id + ", idopont_id=" + idopont_id + ", betegek_id=" + betegek_id + ", aktiv="
+				+ aktiv + "]";
+	}
+	
+	
+
 }

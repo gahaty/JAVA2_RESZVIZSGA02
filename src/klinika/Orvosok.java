@@ -2,14 +2,19 @@ package klinika;
 
 public class Orvosok {
 
-	Integer id;
-	String nev;
-	Integer szakr_id;
+	private Integer id;
+	private String nev;
+	private Integer szakr_id;
 	
 	public Orvosok() {}
 	
-	public Orvosok(Integer id, String nev) {
+	public Orvosok(String nev, Integer id) {
 		this.id = id;
+		this.nev = nev;
+	}
+	
+	public Orvosok(Integer szakr_id, String nev) {
+		this.szakr_id = szakr_id;
 		this.nev = nev;
 	}
 	
@@ -18,6 +23,7 @@ public class Orvosok {
 		this.nev = nev;
 		this.szakr_id = szakr_id;
 	}
+
 
 	public Integer getId() {
 		return id;
@@ -82,6 +88,6 @@ public class Orvosok {
 
 	@Override
 	public String toString() {
-		return "Orvosok [id=" + id + ", nev=" + nev + ", szakr_id=" + szakr_id + "]";
+		return "" + this.id + " -> " + this.nev +"";
 	}
 }

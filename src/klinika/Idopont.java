@@ -1,5 +1,4 @@
 package klinika;
-import java.sql.Time;
 
 public class Idopont {
 

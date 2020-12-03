@@ -2,14 +2,14 @@ package klinika;
 
 public class Betegek {
 
-	String nev;
-	String cim;
-	Integer tel;
-	String email;
-	String ht_nev;
-	String ht_cim;
-	Integer ht_tel;
-	String ht_email;
+	private String nev;
+	private String cim;
+	private Integer tel;
+	private String email;
+	private String ht_nev;
+	private String ht_cim;
+	private Integer ht_tel;
+	private String ht_email;
 
 	public String getNev() {
 		return nev;
@@ -91,12 +91,7 @@ public class Betegek {
 
 	}
 
-	@Override
-	public String toString() {
-		return "Beteg adatai\n Neve: " + nev + ", Címe: " + cim + ", Telefonszáma: " + tel + ", Email: " + email
-				+ "\n Hozzátratozó adatai: " + "\n Neve: " + ht_nev + ",  Címe: " + ht_cim + ", Telefonszáma: " + ht_tel
-				+ ", Email: " + ht_email + "]";
-	}
+	
 
 	@Override
 	public int hashCode() {
@@ -164,5 +159,13 @@ public class Betegek {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Betegek [nev=" + nev + ", cim=" + cim + ", tel=" + tel + ", email=" + email + ", ht_nev=" + ht_nev
+				+ ", ht_cim=" + ht_cim + ", ht_tel=" + ht_tel + ", ht_email=" + ht_email + "]";
+	}
+	
+	
 
 }
