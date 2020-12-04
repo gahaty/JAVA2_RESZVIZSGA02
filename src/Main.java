@@ -4,26 +4,15 @@ import java.util.Scanner;
 import bl.KAppImpl;
 import exception.BadCharException;
 import interfaces.KApp;
+import repository.Repository;
 
 public class Main {
 
 	public static void main(String[] args) {
 		
 		KApp KApp = new KAppImpl();
-		//rp.vizitBetegekLekerdezes();
-		//KApp.betegFelvetel();
+		Repository repo = new Repository();
 
-		/*
-		 * / A fõmenüben 3 menüpont volna,amikor majd megírjuk,hogy az adott menüpont
-		 * mit csinál, akkor ott íratjuk ki:
-		 * 
-		 * 1.Új doktor 2.Új beteg 3.Új szakrendelés(kezelõ) 4.Kezelés lemondás
-		 * 
-		 * Amit az adott menponton belül választ egy Scanner-rel,akkor azt behívja, és
-		 * utána történik az adatfelvitel
-		 */
-
-		//Scanner sc;// = new Scanner(System.in);
 		Scanner sc = new Scanner(System.in);
 		int statusMain = 0;
 		int statusSub1 = -1;
@@ -46,16 +35,15 @@ public class Main {
 				case 1:
 					KApp.ujEsemeny();
 					while (statusSub1 != 0) {
-						sc = new Scanner(System.in);
 						try {
 							statusSub1 = sc.nextInt();
 						} catch (InputMismatchException e) {
 							System.err.println("Nem jó karaktert adtál meg!");
-							continue;
 						}
 						try {
 							switch (statusSub1) {
 							case 1:
+								repo.szakrendelesekLekerdezesAmenuhoz();
 								KApp.ujOrvosFelvetele();
 								System.out.println();
 								KApp.ujEsemeny();
@@ -87,15 +75,14 @@ public class Main {
 					}
 					statusSub1 = -1;
 					break;
+
 				case 2:
 					KApp.Kereses();
 					while (statusSub2 != 0) {
-						sc = new Scanner(System.in);
-						try {						
+						try {
 							statusSub2 = sc.nextInt();
 						} catch (InputMismatchException e) {
 							System.err.println("Nem jó karaktert adtál meg!");
-							continue;
 						}
 						try {
 							switch (statusSub2) {
@@ -124,6 +111,7 @@ public class Main {
 					statusSub2 = -1;
 					break;
 				case 3:
+					System.out.println("Viszontlátásra!");
 					break;
 				default:
 					throw new BadCharException();
@@ -131,6 +119,6 @@ public class Main {
 			} catch (Exception e) {
 			}
 		}
-	}
-		
+		sc.close();
+	}		
 }

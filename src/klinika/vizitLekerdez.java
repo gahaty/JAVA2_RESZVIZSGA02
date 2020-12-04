@@ -1,27 +1,26 @@
 package klinika;
 
 public class vizitLekerdez {
-	
-	Integer id;
-	String osztaly;
-	String orvos;
-	Integer rendelo;
-	String datum;
-	String idopont;
-	String betegNev;
-	
-	public vizitLekerdez() {}
-	
+
+	private Integer id;
+	private String osztaly;
+	private String orvos;
+	private Integer rendelo;
+	private String datum;
+	private String idopont;
+	private String betegNev;
+
+	public vizitLekerdez() {
+	}
+
 	public vizitLekerdez(Integer id, String osztaly) {
-		
 		this.id = id;
 		this.osztaly = osztaly;
-		
 	}
-	
+
 	public vizitLekerdez(Integer id, String osztaly, String orvos, Integer rendelo, String datum, String idopont,
 			String betegNev) {
-		super();
+	
 		this.id = id;
 		this.osztaly = osztaly;
 		this.orvos = orvos;
@@ -150,6 +149,6 @@ public class vizitLekerdez {
 
 	@Override
 	public String toString() {
-		return id + "\t" + osztaly + "\t" + orvos + "\t" + rendelo + "\t" + datum + "\t" + idopont + "\t" + betegNev ;
+		return id + "\t" + osztaly + "\t" + orvos + "\t" + rendelo + "\t" + datum + "\t" + idopont + "\t" + betegNev;
 	}
 }

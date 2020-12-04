@@ -2,15 +2,14 @@ package klinika;
 
 public class Idopont {
 
-	
-	Integer id;
-	String idopont;
-	
+	private Integer id;
+	private String idopont;
+
 	public Idopont() {
 	}
-	
+
 	public Idopont(Integer id, String idopont) {
-		
+
 		this.id = id;
 		this.idopont = idopont;
 	}
@@ -64,6 +63,6 @@ public class Idopont {
 
 	@Override
 	public String toString() {
-		return this.id +" -> "+ this.idopont;
+		return this.id + " -> " + this.idopont;
 	}
 }

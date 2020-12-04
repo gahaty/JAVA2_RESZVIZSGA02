@@ -91,8 +91,6 @@ public class Betegek {
 
 	}
 
-	
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -165,7 +163,4 @@ public class Betegek {
 		return "Betegek [nev=" + nev + ", cim=" + cim + ", tel=" + tel + ", email=" + email + ", ht_nev=" + ht_nev
 				+ ", ht_cim=" + ht_cim + ", ht_tel=" + ht_tel + ", ht_email=" + ht_email + "]";
 	}
-	
-	
-
 }

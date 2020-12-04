@@ -2,9 +2,9 @@ package klinika;
 
 public class Datum {
 
-	Integer id;
-	String datum;
-	
+	private Integer id;
+	private String datum;
+
 	public Datum(Integer id, String datum) {
 		this.id = id;
 		this.datum = datum;
@@ -60,5 +60,5 @@ public class Datum {
 	@Override
 	public String toString() {
 		return "Datum [id=" + id + ", datum=" + datum + "]";
-	}	
+	}
 }

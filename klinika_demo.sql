@@ -3,7 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
+<<<<<<< HEAD
+-- Létrehozás ideje: 2020. Dec 04. 19:21
+=======
 -- Létrehozás ideje: 2020. Dec 03. 20:43
+>>>>>>> f9c5e7f83fe3671855a59302407e8993c51d0094
 -- Kiszolgáló verziója: 10.4.14-MariaDB
 -- PHP verzió: 7.4.11
 
@@ -44,6 +48,12 @@ CREATE TABLE `betegek` (
 --
 
 INSERT INTO `betegek` (`betegek_id`, `nev`, `cim`, `tel`, `email`, `ht_nev`, `ht_cim`, `ht_tel`, `ht_email`) VALUES
+<<<<<<< HEAD
+(1, 'Balla Ilona', 'Monori u.32.', 321356, 'bail@freemail.hu', 'Keskeny György', 'Néma u. 12.', 321356, 'kegyo@gmail.com'),
+(2, 'Léha Kálmán', 'Síp u.21.', 564615, 'leka@freemail.hu', 'Bereg Klára', 'Nagyárok út 10.', 564615, 'bekl@freemail.hu'),
+(3, 'Bébi Orsolya', 'Haladó u. 4.', 869654, 'beor@freemail.hu', 'Kiss Péter', 'Moha tér 4.', 869654, 'kipe@freemail.hu'),
+(4, 'Béla Imre', 'Varsó u. 43.', 849533, 'beim@gmail.com', 'Mala László', 'Pálffy u. 21.', 849533, 'mala@gmail.com');
+=======
 (3, 'Kiss Albert', 'Rozgonyi utca 50.', 518561, 'rozgonyi@gmail.com', 'Nagy Fióna', 'Vedres utca 6.', 1456511, 'fioncsi@gmail.com'),
 (4, 'Nagy Tamás', 'Hosszú sor. 2.', 1865981, 'ntomi@freemail.hu', 'Horváth Ilona', 'Hosszú sor. 2.', 5141461, 'hilike@gmail.com'),
 (5, 'Barta Árpád', 'Szigony u. 5.', 156165, 'b.arpi@fremail.hu', 'Nagy Áron', 'Maros u. 12.', 15641251, 'naron@gmail.com'),
@@ -104,6 +114,7 @@ INSERT INTO `betegek` (`betegek_id`, `nev`, `cim`, `tel`, `email`, `ht_nev`, `ht
 (65, 'ewq', 'ewq', 321, 'ewq', 'ewq', 'ewq', 321, 'ewq'),
 (66, 'ewq', 'ewq', 321, 'ewq', 'ewq', 'ewq', 321, 'ewq'),
 (67, 'ewq', 'ewq', 123, 'ewq', 'ewq', 'ewq', 123, 'ewq');
+>>>>>>> f9c5e7f83fe3671855a59302407e8993c51d0094
 
 -- --------------------------------------------------------
 
@@ -121,6 +132,9 @@ CREATE TABLE `datum` (
 --
 
 INSERT INTO `datum` (`datum_id`, `datum`) VALUES
+<<<<<<< HEAD
+(1, '2020-12-07');
+=======
 (1, '2020-12-07'),
 (2, '2020-12-08'),
 (8, '2020-10-01'),
@@ -152,6 +166,7 @@ INSERT INTO `datum` (`datum_id`, `datum`) VALUES
 (48, '2012-01-01'),
 (49, '2020-12-12'),
 (50, '2020-12-10');
+>>>>>>> f9c5e7f83fe3671855a59302407e8993c51d0094
 
 -- --------------------------------------------------------
 
@@ -173,7 +188,11 @@ INSERT INTO `idopont` (`idopont_id`, `idopont`, `megjelenit`) VALUES
 (1, '08:00:00', 1),
 (2, '08:30:00', 1),
 (3, '09:00:00', 1),
+<<<<<<< HEAD
+(4, '09:30:00', 0),
+=======
 (4, '09:30:00', 1),
+>>>>>>> f9c5e7f83fe3671855a59302407e8993c51d0094
 (5, '10:00:00', 1),
 (6, '10:30:00', 1),
 (7, '11:00:00', 1),
@@ -198,12 +217,19 @@ CREATE TABLE `kezelok` (
 --
 
 INSERT INTO `kezelok` (`id`, `szakr_id`, `rendelo`, `kezeles`) VALUES
+<<<<<<< HEAD
+(1, 1, '101', 'Bőrsebészet'),
+(2, 1, '102', 'Orvos esztétika'),
+(3, 4, '401', 'Fogszabályozás'),
+(4, 4, '402', 'Konzerváló');
+=======
 (1, 1, '101', ''),
 (2, 1, '102', ''),
 (3, 2, '201', ''),
 (4, 3, '301', 'endokrinológiáskodás'),
 (5, 4, '401', 'fogszabályozás'),
 (6, 1, '103', 'valami');
+>>>>>>> f9c5e7f83fe3671855a59302407e8993c51d0094
 
 -- --------------------------------------------------------
 
@@ -222,6 +248,12 @@ CREATE TABLE `orvosok` (
 --
 
 INSERT INTO `orvosok` (`id`, `szakr_id`, `nev`) VALUES
+<<<<<<< HEAD
+(1, 1, 'dr. Nagypál Tamás'),
+(2, 1, 'dr. Kiss Hajnalka'),
+(3, 4, 'dr. Szeder István'),
+(4, 4, 'dr. Virágh Antal');
+=======
 (1, 1, 'Tóth Andor'),
 (2, 1, 'Kis Lajos'),
 (4, 3, 'Nagy Elemér'),
@@ -229,6 +261,7 @@ INSERT INTO `orvosok` (`id`, `szakr_id`, `nev`) VALUES
 (12, 1, 'dr. Frank Pál'),
 (13, 2, 'Nagy Antal'),
 (14, 1, 'Szép Károly');
+>>>>>>> f9c5e7f83fe3671855a59302407e8993c51d0094
 
 -- --------------------------------------------------------
 
@@ -250,7 +283,11 @@ INSERT INTO `szakrendeles` (`szakrendeles_id`, `nev`) VALUES
 (2, 'Belgyógyászat'),
 (3, 'Endokrinológia'),
 (4, 'Fogászat'),
+<<<<<<< HEAD
+(5, 'Fül-orr-gégész'),
+=======
 (5, 'Fül-orr gége'),
+>>>>>>> f9c5e7f83fe3671855a59302407e8993c51d0094
 (6, 'Hematológia'),
 (7, 'Ortopédia'),
 (8, 'Pszichiátria'),
@@ -279,6 +316,12 @@ CREATE TABLE `vizit` (
 --
 
 INSERT INTO `vizit` (`id`, `szakrendeles_id`, `orvosok_id`, `kezelok_id`, `datum_id`, `idopont_id`, `betegek_id`, `aktiv`) VALUES
+<<<<<<< HEAD
+(1, 1, 1, 2, 1, 1, 1, 0),
+(2, 1, 2, 1, 1, 1, 2, 1),
+(3, 4, 4, 3, 1, 4, 3, 1),
+(4, 4, 3, 4, 1, 4, 4, 1);
+=======
 (20, 1, 1, 2, 8, 9, 16, 1),
 (21, 1, 2, 1, 8, 9, 17, 1),
 (23, 1, 1, 1, 10, 1, 19, 1),
@@ -339,6 +382,7 @@ INSERT INTO `vizit` (`id`, `szakrendeles_id`, `orvosok_id`, `kezelok_id`, `datum
 (78, 1, 1, 1, 12, 7, 47, 1),
 (79, 2, 7, 3, 50, 1, 47, 1),
 (80, 1, 1, 1, 26, 1, 47, 1);
+>>>>>>> f9c5e7f83fe3671855a59302407e8993c51d0094
 
 --
 -- Indexek a kiírt táblákhoz
@@ -402,13 +446,21 @@ ALTER TABLE `vizit`
 -- AUTO_INCREMENT a táblához `betegek`
 --
 ALTER TABLE `betegek`
+<<<<<<< HEAD
+  MODIFY `betegek_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+=======
   MODIFY `betegek_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+>>>>>>> f9c5e7f83fe3671855a59302407e8993c51d0094
 
 --
 -- AUTO_INCREMENT a táblához `datum`
 --
 ALTER TABLE `datum`
+<<<<<<< HEAD
+  MODIFY `datum_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+=======
   MODIFY `datum_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+>>>>>>> f9c5e7f83fe3671855a59302407e8993c51d0094
 
 --
 -- AUTO_INCREMENT a táblához `idopont`
@@ -420,25 +472,41 @@ ALTER TABLE `idopont`
 -- AUTO_INCREMENT a táblához `kezelok`
 --
 ALTER TABLE `kezelok`
+<<<<<<< HEAD
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+=======
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+>>>>>>> f9c5e7f83fe3671855a59302407e8993c51d0094
 
 --
 -- AUTO_INCREMENT a táblához `orvosok`
 --
 ALTER TABLE `orvosok`
+<<<<<<< HEAD
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+=======
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+>>>>>>> f9c5e7f83fe3671855a59302407e8993c51d0094
 
 --
 -- AUTO_INCREMENT a táblához `szakrendeles`
 --
 ALTER TABLE `szakrendeles`
+<<<<<<< HEAD
+  MODIFY `szakrendeles_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+=======
   MODIFY `szakrendeles_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+>>>>>>> f9c5e7f83fe3671855a59302407e8993c51d0094
 
 --
 -- AUTO_INCREMENT a táblához `vizit`
 --
 ALTER TABLE `vizit`
+<<<<<<< HEAD
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+=======
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+>>>>>>> f9c5e7f83fe3671855a59302407e8993c51d0094
 
 --
 -- Megkötések a kiírt táblákhoz

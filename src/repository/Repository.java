@@ -55,7 +55,7 @@ public class Repository {
 		}
 		return null;
 	}
-	
+
 	public Integer ujKezelo(Kezelok kezelo) {
 		String query = "INSERT INTO kezelok (szakr_id,rendelo,kezeles) values(?,?,?)";
 		try {
@@ -73,37 +73,7 @@ public class Repository {
 		}
 		return null;
 	}
-	
-//	public List<Betegek> betegLekerdezes() {
-//
-//		String query = "SELECT * FROM betegek";
-//		List<Betegek> resultList = new ArrayList<>();
-//		PreparedStatement stmt;
-//		try {
-//			stmt = conn.prepareStatement(query);
-//			stmt.executeQuery();
-//			ResultSet rs = stmt.getResultSet();
-//			while (rs.next()) {
-//				Betegek beteg = new Betegek();
-//				beteg.setNev(rs.getString("nev"));
-//				beteg.setCim(rs.getString("cim"));
-//				beteg.setTel(rs.getInt("tel"));
-//				beteg.setEmail(rs.getString("email"));
-//				beteg.setHt_nev(rs.getString("ht_nev"));
-//				beteg.setHt_cim(rs.getString("ht_cim"));
-//				beteg.setHt_tel(rs.getInt("ht_tel"));
-//				beteg.setHt_email(rs.getString("ht_email"));
-//				resultList.add(beteg);
-//			}
-//		} catch (Exception e) {
-//
-//		}
-//		for (Betegek beteg : resultList) {
-//			System.out.println(beteg);
-//		}
-//		return resultList;
-//	}
-	
+
 	public List<Orvosok> orvosLekerdezes() {
 
 		String query = "SELECT * FROM orvosok";
@@ -128,7 +98,30 @@ public class Repository {
 		}
 		return resultList;
 	}
-	
+
+	public vizitLekerdez kezelesLemondasahozLekerdezes(Integer betegId) {
+		vizitLekerdez vl = null;
+		String query = "SELECT vizit.id, datum.datum, idopont.idopont, betegek.nev FROM vizit INNER JOIN datum ON vizit.datum_id = datum.datum_id INNER JOIN idopont ON vizit.idopont_id = idopont.idopont_id INNER JOIN betegek ON vizit.betegek_id = ?";
+		PreparedStatement stmt;
+		try {
+
+			stmt = conn.prepareStatement(query);
+			stmt.setInt(1, betegId);
+			stmt.executeQuery();
+			ResultSet rs = stmt.getResultSet();
+			if (rs.next()) {
+				vl = new vizitLekerdez();
+				vl.setId(rs.getInt("id"));
+				vl.setDatum(rs.getString("datum.datum"));
+				vl.setIdopont(rs.getString("idopont.idopont"));
+				vl.setBetegNev(rs.getString("betegek.nev"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return vl;
+	}
+
 	public void kezelesLemondasa(Integer betegId) {
 
 		String query = "UPDATE vizit SET aktiv=? WHERE betegek_id=?";
@@ -142,7 +135,6 @@ public class Repository {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 
@@ -208,7 +200,7 @@ public class Repository {
 		return null;
 	}
 
-	public List<Szakrendeles> szakrendelesekLekerdezes() {
+	public List<Szakrendeles> szakrendelesekLekerdezesAmenuhoz() {
 
 		String query = "SELECT * FROM szakrendeles";
 		List<Szakrendeles> resultList = new ArrayList<>();
@@ -262,7 +254,7 @@ public class Repository {
 		Integer orvosokSzakrendelesSzerint = 0;
 		Integer eredmenyKezelok = null;
 		Integer eredmenyOrvosok = null;
-		
+
 		String query = "SELECT COUNT(*) AS szam FROM kezelok WHERE `id` NOT IN (SELECT DISTINCT (`kezelok_id`) FROM vizit WHERE szakrendeles_id = ? AND datum_id = ? AND idopont_id = ?)";
 
 		PreparedStatement stmt;
@@ -294,7 +286,7 @@ public class Repository {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	
+
 		query = "SELECT COUNT(*) AS szam FROM orvosok WHERE `id` NOT IN (SELECT DISTINCT (`orvosok_id`) FROM vizit WHERE szakrendeles_id = ? AND datum_id = ? AND idopont_id = ?)";
 
 		try {
@@ -391,7 +383,8 @@ public class Repository {
 		return eredmenyLista;
 	}
 
-	public List<Kezelok> kezelokLekerdezeseAvizitTablaAlapjan(Integer szakrendelesId, Integer datumId, Integer idopontId) {
+	public List<Kezelok> kezelokLekerdezeseAvizitTablaAlapjan(Integer szakrendelesId, Integer datumId,
+			Integer idopontId) {
 		String query = "SELECT * FROM kezelok WHERE `id` NOT IN (SELECT DISTINCT(`kezelok_id`) FROM vizit WHERE szakrendeles_id = ? AND datum_id = ? AND idopont_id = ?)";
 		List<Kezelok> eredmenyLista = new ArrayList<>();
 		PreparedStatement stmt;
@@ -408,6 +401,7 @@ public class Repository {
 					kezelok.setId(rs.getInt("id"));
 					kezelok.setSzakr_id(rs.getInt("szakr_id"));
 					kezelok.setRendelo(rs.getString("rendelo"));
+					kezelok.setKezeles(rs.getString("kezeles"));
 					eredmenyLista.add(kezelok);
 				}
 			}
@@ -420,7 +414,55 @@ public class Repository {
 		return eredmenyLista;
 	}
 
-	public List<Orvosok> orvosokLekerdezeseAvizitTablaAlapjan(Integer szakrendelesId, Integer datumId, Integer idopontId) {
+	public List<Kezelok> kezelokLekerdezeseAmenuhoz() {
+		String query = "SELECT * FROM kezelok";
+		List<Kezelok> eredmenyLista = new ArrayList<>();
+		PreparedStatement stmt;
+		try {
+			stmt = conn.prepareStatement(query);
+			stmt.executeQuery();
+			ResultSet rs = stmt.getResultSet();
+			while (rs.next()) {
+				Kezelok kezelok = new Kezelok();
+				kezelok.setRendelo(rs.getString("rendelo"));
+				kezelok.setKezeles(rs.getString("kezeles"));
+				eredmenyLista.add(kezelok);
+			}
+
+			for (Kezelok kezelok : eredmenyLista) {
+				System.out.println(kezelok.getRendelo() + " -> " + kezelok.getKezeles());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return eredmenyLista;
+	}
+
+	public List<Orvosok> orvosokLekerdezeseAmenuhoz() {
+		String query = "SELECT * FROM orvosok";
+		List<Orvosok> eredmenyLista = new ArrayList<>();
+		PreparedStatement stmt;
+		try {
+			stmt = conn.prepareStatement(query);
+			stmt.executeQuery();
+			ResultSet rs = stmt.getResultSet();
+			while (rs.next()) {
+				Orvosok orvosok = new Orvosok();
+				orvosok.setNev(rs.getString("nev"));
+				eredmenyLista.add(orvosok);
+			}
+
+			for (Orvosok orvosok : eredmenyLista) {
+				System.out.println(orvosok.getNev());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return eredmenyLista;
+	}
+
+	public List<Orvosok> orvosokLekerdezeseAvizitTablaAlapjan(Integer szakrendelesId, Integer datumId,
+			Integer idopontId) {
 		String query = "SELECT * FROM orvosok WHERE `id` NOT IN (SELECT DISTINCT(`orvosok_id`) FROM vizit WHERE szakrendeles_id = ? AND datum_id = ? AND idopont_id = ?)";
 		List<Orvosok> eredmenyLista = new ArrayList<>();
 		PreparedStatement stmt;
@@ -448,7 +490,7 @@ public class Repository {
 		}
 		return eredmenyLista;
 	}
-	
+
 	public Boolean szabadIdopontEllenorzes(Boolean vanSzabadIdopont, List<Boolean> idopontBeGyujt) {
 		for (int i = 1; i < idopontBeGyujt.size(); i++) {
 			if (idopontBeGyujt.get(i) == true) {
@@ -510,31 +552,28 @@ public class Repository {
 		}
 		return eredmeny;
 	}
-	
-	public Integer szakrendelesEllenorzesAvizitTablaban(Integer szakrendelesId) {
-		Integer eredmeny = 0;
-		String query = "SELECT COUNT(*) AS szam FROM vizit WHERE szakrendeles_id = ?";
-		PreparedStatement pstmt;
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, szakrendelesId);
-			pstmt.executeQuery();
-			ResultSet rs = pstmt.getResultSet();
-			if (rs.next()) {
-				eredmeny = rs.getInt("szam");
-				
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return eredmeny;
-	}
-	
-	public void vizitIdopontLekerdezes() {
-		
-	}
-	
-	public List<Kezelok> kezelokLekerdezes(Integer szakrendelesId) {
+
+//	public Integer szakrendelesEllenorzesAvizitTablaban(Integer szakrendelesId) {
+//		Integer eredmeny = 0;
+//		String query = "SELECT COUNT(*) AS szam FROM vizit WHERE szakrendeles_id = ?";
+//		PreparedStatement pstmt;
+//		try {
+//			pstmt = conn.prepareStatement(query);
+//			pstmt.setInt(1, szakrendelesId);
+//			pstmt.executeQuery();
+//			ResultSet rs = pstmt.getResultSet();
+//			if (rs.next()) {
+//				eredmeny = rs.getInt("szam");
+//
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return eredmeny;
+//	}
+
+
+	public List<Kezelok> kezelokLekerdezeseSzakrendelokIdAlapjan(Integer szakrendelesId) {
 		String query = "SELECT * FROM kezelok WHERE szakr_id = ?";
 		List<Kezelok> eredmenyLista = new ArrayList<>();
 		PreparedStatement stmt;
@@ -544,12 +583,12 @@ public class Repository {
 			stmt.executeQuery();
 			ResultSet rs = stmt.getResultSet();
 			while (rs.next()) {
-					Kezelok kezelok = new Kezelok();
-					kezelok.setId(rs.getInt("id"));
-					kezelok.setSzakr_id(rs.getInt("szakr_id"));
-					kezelok.setRendelo(rs.getString("rendelo"));
-					kezelok.setKezeles(rs.getString("kezeles"));
-					eredmenyLista.add(kezelok);
+				Kezelok kezelok = new Kezelok();
+				kezelok.setId(rs.getInt("id"));
+				kezelok.setSzakr_id(rs.getInt("szakr_id"));
+				kezelok.setRendelo(rs.getString("rendelo"));
+				kezelok.setKezeles(rs.getString("kezeles"));
+				eredmenyLista.add(kezelok);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -559,54 +598,29 @@ public class Repository {
 		}
 		return eredmenyLista;
 	}
-	
+
 	public void vizitBetegekLekerdezes() {
-		String query = "SELECT vizit.id, szakrendeles.nev, orvosok.nev, kezelok.rendelo, datum.datum, idopont.idopont, betegek.nev FROM vizit INNER JOIN szakrendeles ON vizit.szakrendeles_id = szakrendeles.szakrendeles_id INNER JOIN orvosok ON vizit.orvosok_id = orvosok.id INNER JOIN kezelok ON vizit.kezelok_id = kezelok.id INNER JOIN datum ON vizit.datum_id = datum.datum_id INNER JOIN idopont ON vizit.idopont_id = idopont.idopont_id INNER JOIN betegek ON vizit.betegek_id = betegek.betegek_id ORDER BY `idopont`.`idopont` ASC";
+		String query = "SELECT vizit.id, szakrendeles.nev, orvosok.nev, kezelok.rendelo, datum.datum, idopont.idopont, betegek.nev FROM vizit INNER JOIN szakrendeles ON vizit.szakrendeles_id = szakrendeles.szakrendeles_id INNER JOIN orvosok ON vizit.orvosok_id = orvosok.id INNER JOIN kezelok ON vizit.kezelok_id = kezelok.id INNER JOIN datum ON vizit.datum_id = datum.datum_id INNER JOIN idopont ON vizit.idopont_id = idopont.idopont_id INNER JOIN betegek ON vizit.betegek_id = betegek.betegek_id WHERE aktiv = 1 ORDER BY `datum`.`datum` ASC";
 		vizitLekerdez vl = null;
 		PreparedStatement stmt;
 		try {
 			stmt = conn.prepareStatement(query);
 			stmt.executeQuery();
 			ResultSet rs = stmt.getResultSet();
-			System.out.println("ID\tSzakrendelés\tOrvos\t\tKezelõ\tDátum\t\tIdõpont\t\tPáciens\n");
+			System.out.println("ID\tSzakrendelés\tOrvos\t\t\tKezelõ\tDátum\t\tIdõpont\t\tPáciens\n");
 			while (rs.next()) {
-					vl = new vizitLekerdez();
-					vl.setId(rs.getInt("id"));
-					vl.setOsztaly(rs.getString("szakrendeles.nev"));
-					vl.setOrvos(rs.getString("orvosok.nev"));
-					vl.setRendelo(rs.getInt("kezelok.rendelo"));
-					vl.setDatum(rs.getString("datum.datum"));
-					vl.setIdopont(rs.getString("idopont.idopont"));
-					vl.setBetegNev(rs.getString("betegek.nev"));
-					System.out.println(vl);
+				vl = new vizitLekerdez();
+				vl.setId(rs.getInt("id"));
+				vl.setOsztaly(rs.getString("szakrendeles.nev"));
+				vl.setOrvos(rs.getString("orvosok.nev"));
+				vl.setRendelo(rs.getInt("kezelok.rendelo"));
+				vl.setDatum(rs.getString("datum.datum"));
+				vl.setIdopont(rs.getString("idopont.idopont"));
+				vl.setBetegNev(rs.getString("betegek.nev"));
+				System.out.println(vl);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-//	
-//	public List<Orvosok> OrvosokLekerdezes(Integer szakrendelesId) {
-//		String query = "SELECT * FROM orvosok WHERE szakr_id = ?";
-//		List<Orvosok> eredmenyLista = new ArrayList<>();
-//		PreparedStatement stmt;
-//		try {
-//			stmt = conn.prepareStatement(query);
-//			stmt.setInt(1, szakrendelesId);
-//			stmt.executeQuery();
-//			ResultSet rs = stmt.getResultSet();
-//			while (rs.next()) {
-//					Orvosok orvosok = new Orvosok();
-//					orvosok.setId(rs.getInt("id"));
-//					orvosok.setSzakr_id(rs.getInt("szakr_id"));
-//					orvosok.setNev(rs.getString("nev"));
-//					eredmenyLista.add(orvosok);
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		for (Orvosok orvosok : eredmenyLista) {
-//			System.out.println(orvosok.toString());
-//		}
-//		return eredmenyLista;
-//	}
 }

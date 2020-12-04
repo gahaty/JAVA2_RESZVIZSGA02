@@ -5,25 +5,29 @@ public class Orvosok {
 	private Integer id;
 	private String nev;
 	private Integer szakr_id;
-	
-	public Orvosok() {}
-	
+
+	public Orvosok() {
+	}
+
+	public Orvosok(String nev) {
+		this.nev = nev;
+	}
+
 	public Orvosok(String nev, Integer id) {
 		this.id = id;
 		this.nev = nev;
 	}
-	
+
 	public Orvosok(Integer szakr_id, String nev) {
 		this.szakr_id = szakr_id;
 		this.nev = nev;
 	}
-	
+
 	public Orvosok(Integer id, String nev, Integer szakr_id) {
 		this.id = id;
 		this.nev = nev;
 		this.szakr_id = szakr_id;
 	}
-
 
 	public Integer getId() {
 		return id;
@@ -88,6 +92,6 @@ public class Orvosok {
 
 	@Override
 	public String toString() {
-		return "" + this.id + " -> " + this.nev +"";
+		return "" + this.id + " -> " + this.nev + "";
 	}
 }

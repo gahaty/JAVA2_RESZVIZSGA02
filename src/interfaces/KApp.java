@@ -18,8 +18,5 @@ public interface KApp {
 
 	void vizitBetegekLekerdezes();
 
-	void orvosLekerdezes();
-	
-
-	
+	void orvosLekerdezes();	
 }

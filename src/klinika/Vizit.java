@@ -2,13 +2,14 @@ package klinika;
 
 public class Vizit {
 
-	Integer szakrendeles_id;
-	Integer orvosok_id;
-	Integer kezelok_id;
-	Integer datum_id;
-	Integer idopont_id;
-	Integer betegek_id;
-	Boolean aktiv;
+	private Integer szakrendeles_id;
+	private Integer orvosok_id;
+	private Integer kezelok_id;
+	private Integer datum_id;
+	private Integer idopont_id;
+	private Integer betegek_id;
+	private Boolean aktiv;
+	
 
 	public Integer getSzakrendeles_id() {
 		return szakrendeles_id;
@@ -77,7 +78,7 @@ public class Vizit {
 		this.betegek_id = betegek_id;
 		this.aktiv = aktiv;
 	}
-	
+
 	public Vizit(Integer szakrendeles_id, Integer orvosok_id, Integer kezelok_id, Integer datum_id, Integer idopont_id,
 			Integer betegek_id) {
 
@@ -99,7 +100,4 @@ public class Vizit {
 				+ ", datum_id=" + datum_id + ", idopont_id=" + idopont_id + ", betegek_id=" + betegek_id + ", aktiv="
 				+ aktiv + "]";
 	}
-	
-	
-
 }

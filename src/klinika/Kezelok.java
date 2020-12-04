@@ -2,43 +2,46 @@ package klinika;
 
 public class Kezelok {
 
-	Integer id;
-	Integer szakr_id;
-	String rendelo;
-	String kezeles;
-	
-	public Kezelok() {}
-	
+	private Integer id;
+	private Integer szakr_id;
+	private String rendelo;
+	private String kezeles;
+
+	public Kezelok() {
+	}
+
 	public Kezelok(Integer szakr_id, String rendelo) {
-		
-		
 		this.szakr_id = szakr_id;
 		this.rendelo = rendelo;
 	}
-	
+
 	public Kezelok(Integer id, Integer szakr_id, String rendelo) {
-		
+
 		this.id = id;
 		this.szakr_id = szakr_id;
 		this.rendelo = rendelo;
 	}
-	
+
+	public Kezelok(String rendelo, String kezeles) {
+
+		this.rendelo = rendelo;
+		this.kezeles = kezeles;
+	}
+
 	public Kezelok(Integer id, Integer szakr_id, String rendelo, String kezeles) {
-		
+
 		this.id = id;
 		this.szakr_id = szakr_id;
 		this.rendelo = rendelo;
 		this.kezeles = kezeles;
 	}
-	
+
 	public Kezelok(Integer szakr_id, String rendelo, String kezeles) {
-	
+
 		this.szakr_id = szakr_id;
 		this.rendelo = rendelo;
 		this.kezeles = kezeles;
 	}
-	
-	
 
 	public String getKezeles() {
 		return kezeles;
@@ -119,7 +122,4 @@ public class Kezelok {
 	public String toString() {
 		return this.getId() + " -> rendelõ:" + this.getRendelo() + " -> " + this.getKezeles();
 	}
-
-	
-	
 }
